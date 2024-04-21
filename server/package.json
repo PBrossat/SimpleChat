@@ -1,0 +1,9 @@
+{
+  "name": "SimpleMessage-backend",
+  "version": "0.0.1",
+  "description": "SimpleMessage backend",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
