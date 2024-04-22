@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 // Database
-DB_Simple_message.db 
+DB_Simple_Chat.db 
 DB_Tables.sql
