@@ -1,9 +1,10 @@
 import "./App.css";
+import { CreateAccount } from "./components/CreateAccount";
 
 function App() {
   return (
     <div className="App">
-      <p>Hello World SimpleMessage App</p>
+      <CreateAccount />
     </div>
   );
 }
