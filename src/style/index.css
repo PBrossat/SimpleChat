@@ -1,0 +1,41 @@
+body {
+  font-family:
+    Calibre,
+    Helvetica Neue,
+    Segoe UI,
+    Helvetica,
+    Arial,
+    Lucida Grande,
+    sans-serif;
+}
+
+.primary-btn {
+  color: white;
+  background: #0a7cff;
+  border-radius: 30px;
+  font-size: 15px;
+  height: 46px;
+  padding: 0 40px;
+  transition: background 0.2s ease-in;
+  width: auto;
+  margin: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #5359ff;
+}
+
+.create-account-link {
+  font-size: 15px;
+  color: blue;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.create-account-link:hover {
+  color: darkblue;
+  text-decoration: underline;
+}
