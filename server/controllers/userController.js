@@ -34,6 +34,7 @@ export function getUser(username) {
       email: "",
       name: "",
       surname: "",
+      password: "",
     };
 
     // Verify if the user exists in the database
@@ -48,6 +49,7 @@ export function getUser(username) {
         user.email = row.email;
         user.name = row.name;
         user.surname = row.surname;
+        user.password = row.password;
       }
 
       resolve(user);

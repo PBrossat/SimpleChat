@@ -16,10 +16,6 @@ router.post("/create-account", async (req, res) => {
     res.status(500).send("Error hashing password");
   });
 
-  // console.log("username : " + username);
-  // console.log("email : " + email);
-  // console.log("password : " + password);
-
   // add the user to the database
   const user = { username, email, password };
   addUsers(user)
