@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function SignIn() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -57,14 +60,6 @@ export function SignIn() {
             p.remove();
           }, 5000);
 
-          // add button to go to the login page
-          const button = document.createElement("button");
-          button.textContent = "Login";
-          button.onclick = () => {
-            window.location.href = "/login";
-          };
-          document.body.appendChild(button);
-
           // Clear the form
           setName("");
           setEmail("");
@@ -105,7 +100,14 @@ export function SignIn() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Create Account</button>
+        <button type="submit">Créer le compte </button>
+        <p
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => navigate("/")}
+        >
+          Retour à l'accueil
+        </p>
       </form>
     </div>
   );
