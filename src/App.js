@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import { SignIn } from "./components/CreateAccount";
-import { LogIn } from "./components/Authentification";
+import "./style/App.css";
+import { SignIn } from "./components/SignIn";
+import { LogIn } from "./components/LogIn";
 import { Home } from "./components/Home";
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/signin" element={<LogIn />} />
-        <Route path="/login" element={<SignIn />} />
+        <Route exact path="/login" element={<LogIn />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
   );
