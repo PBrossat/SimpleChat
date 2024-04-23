@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function CreateAccount() {
+export function SignIn() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,14 +47,39 @@ export function CreateAccount() {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Account created successfully");
+          alert("Votre compte a été créé avec succès");
+
+          // Add <p> element to the DOM to display the message
+          const p = document.createElement("p");
+          p.textContent = "Account created successfully";
+          document.body.appendChild(p);
+          setTimeout(() => {
+            p.remove();
+          }, 5000);
+
+          // add button to go to the login page
+          const button = document.createElement("button");
+          button.textContent = "Login";
+          button.onclick = () => {
+            window.location.href = "/login";
+          };
+          document.body.appendChild(button);
+
+          // Clear the form
+          setName("");
+          setEmail("");
+          setPassword("");
         } else {
-          alert("An error occurred");
+          alert(
+            "Votre compte n'a pas pu être créé, essayez avec une autre nom d'utilisateur ou un autre email"
+          );
         }
       })
       .catch((error) => {
         console.error(error);
-        alert("An error occurred");
+        alert(
+          "Une erreur s'est produite lors de la création de votre compte, veuillez réessayer plus tard"
+        );
       });
   }
 
