@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "node:http";
 import { createAccount } from "./routes/createAccount.js";
+import { login } from "./routes/login.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 // routes of the api application
 app.use("/api", createAccount);
+app.use("/api", login);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
