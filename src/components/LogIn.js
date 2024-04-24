@@ -70,10 +70,7 @@ export function LogIn() {
           <button type="submit" className="btn primary-btn">
             Continuer
           </button>
-          <p
-            className="create-account-link"
-            onClick={() => navigate("/signin")}
-          >
+          <p className="underlined-link" onClick={() => navigate("/signin")}>
             Pas de compte ?
           </p>
         </form>

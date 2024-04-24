@@ -18,7 +18,7 @@ export function Home() {
         <button className="btn primary-btn" onClick={() => navigate("/login")}>
           Se connecter
         </button>
-        <p className="create-account-link" onClick={() => navigate("/signin")}>
+        <p className="underlined-link" onClick={() => navigate("/signin")}>
           Créer un compte ?
         </p>
       </div>

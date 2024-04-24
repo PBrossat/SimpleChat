@@ -27,7 +27,7 @@ body {
   background: #5359ff;
 }
 
-.create-account-link {
+.underlined-link {
   font-size: 15px;
   color: blue;
   text-decoration: none;
@@ -35,7 +35,25 @@ body {
   transition: color 0.2s ease;
 }
 
-.create-account-link:hover {
+.underlined-link:hover {
   color: darkblue;
   text-decoration: underline;
+}
+
+.logo-SimpleChat {
+  align-items: center;
+  display: flex;
+  height: 120px;
+  justify-content: center;
+  min-width: 100%;
+  width: 120px;
+}
+
+.logo-SimpleChat img {
+  height: 85px !important;
+  width: 85px;
+}
+
+p {
+  font-size: 35px;
 }

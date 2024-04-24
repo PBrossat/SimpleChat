@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../data/logo-SimpleChat.png";
+import "../style/Sigin.css";
 
 export function SignIn() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [surname, setSurname] = useState("");
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
@@ -12,7 +17,7 @@ export function SignIn() {
     e.preventDefault();
 
     //Verification username
-    if (name === "") {
+    if (username === "") {
       alert("Username is required");
       return;
     }
@@ -39,7 +44,13 @@ export function SignIn() {
       return;
     }
 
-    const user = { name, email, password };
+    // password confirmation verification
+    if (password !== passwordConfirmation) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const user = { name, surname, username, email, password };
 
     fetch("http://localhost:3001/api/create-account", {
       method: "POST",
@@ -61,7 +72,7 @@ export function SignIn() {
           }, 5000);
 
           // Clear the form
-          setName("");
+          setUsername("");
           setEmail("");
           setPassword("");
         } else {
@@ -79,36 +90,79 @@ export function SignIn() {
   }
 
   return (
-    <div>
-      <h1>Création de compte</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nom d'utilisateur"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Créer le compte </button>
-        <p
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => navigate("/")}
-        >
-          Retour à l'accueil
+    <div className="Signin">
+      <div className="Signin-container">
+        <div className="logo-SimpleChat">
+          <img src={logo} alt="Logo" />
+        </div>
+        <h1>SimpleChat</h1>
+        <p>
+          Créez-vous un compte <b>maintenant</b> !{" "}
         </p>
-      </form>
+        <form className="form-signin" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Prénom"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Nom"
+            value={name}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Nom d'utilisateur"
+            value={name}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Confirmer le mot de passe"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+
+          <button className="btn primary-btn" type="submit">
+            Créer le compte{" "}
+          </button>
+        </form>
+        <div className="link-container">
+          <p
+            className="underlined-link p-left"
+            onClick={() => navigate("/login")}
+          >
+            Vous avez déjà un compte ?
+          </p>
+          <p className="underlined-link p-write" onClick={() => navigate("/")}>
+            Retour à l'accueil
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
