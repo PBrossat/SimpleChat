@@ -1,7 +1,15 @@
 import sqlite3 from "sqlite3";
+import { fileURLToPath } from "url";
+import path, { dirname } from "path";
 
-const DB_PATH =
-  "/Users/pierrickbrossat/Documents/ALL/Projet Perso/SimpleChat/server/DB_Simple_chat.db";
+// Obtain the "pwd path" of the current file
+const __filename = fileURLToPath(import.meta.url);
+
+// Obtain the "pwd path" of the directory where the current file is located
+const __dirname = dirname(__filename);
+
+// Define the path to the database
+const DB_PATH = path.resolve(__dirname, "../DB_Simple_chat.db");
 
 export function addUsers(user) {
   return new Promise((resolve, reject) => {
