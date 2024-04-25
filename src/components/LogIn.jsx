@@ -53,7 +53,7 @@ export function LogIn() {
         setTimeout(() => {
           setUsername("");
           setPassword("");
-          navigate(`/chat/${data.id}`); // connexion to the user's chat page
+          navigate(`/chat/${data.id}`);
         }, 1000);
       })
       .catch((error) => {
