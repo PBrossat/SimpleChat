@@ -50,6 +50,11 @@ export function LogIn() {
           toast.success(
             "Connexion réussie. \n Bienvenue " + data.name + " " + data.surname
           );
+        setTimeout(() => {
+          setUsername("");
+          setPassword("");
+          navigate(`/chat/${data.id}`); // connexion to the user's chat page
+        }, 1000);
       })
       .catch((error) => {
         toast.error(
