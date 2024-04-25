@@ -36,11 +36,12 @@ export function getUser(username) {
     const values = [username];
 
     const user = {
-      username: "",
-      email: "",
-      name: "",
-      surname: "",
-      password: "",
+      id: null,
+      username: null,
+      email: null,
+      name: null,
+      surname: null,
+      password: null,
     };
 
     // Verify if the user exists in the database
