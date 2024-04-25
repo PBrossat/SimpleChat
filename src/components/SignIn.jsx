@@ -90,7 +90,7 @@ export function SignIn() {
     const user = { name, surname, username, email, password };
 
     fetch("http://localhost:3001/api/create-account", {
-      method: "POST",
+      method: "POST", // POST request to create a new account 
       headers: {
         "Content-Type": "application/json",
       },
