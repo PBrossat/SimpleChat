@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
             const refreshToken = jwt.sign(
               user,
               process.env.REFRESH_TOKEN_SECRET,
-              { expiresIn: "1d" } // longer expiration time than the first token
+              { expiresIn: "1h" } // longer expiration time than the first token
             );
 
             res.status(200).json({ user, token, refreshToken });

@@ -26,7 +26,7 @@ router.post("/refreshToken", async (req, res) => {
       expiresIn: "3m",
     });
     const refreshToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "1d",
+      expiresIn: "1h",
     });
     res.status(200).json({ token, refreshToken });
   });
