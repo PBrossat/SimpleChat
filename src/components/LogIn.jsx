@@ -11,7 +11,7 @@ export function LogIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (username === "") {
@@ -24,43 +24,38 @@ export function LogIn() {
       return;
     }
 
-    fetch("http://localhost:3001/api/login", {
+    const req = await fetch("http://localhost:3001/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else if (response.status === 401) {
-          return;
-        } else {
-          throw new Error("An error occurred. Please try again later");
-        }
-      })
-      .then((data) => {
-        // if the user exists and the password is correct
+    });
 
-        // if the user don't have a name or surname in the database
-        if (data.name === "" || data.surname === "") {
-          toast.success("Connexion réussie.");
-        } else
-          toast.success(
-            "Connexion réussie. \n Bienvenue " + data.name + " " + data.surname
-          );
-        setTimeout(() => {
-          setUsername("");
-          setPassword("");
-          navigate(`/chat/${data.id}`);
-        }, 1000);
-      })
-      .catch((error) => {
-        toast.error(
-          "Une erreur s'est produite. \n Veuillez réessayer de vous connecter"
-        );
-      });
+    if (req.status === 401) {
+      toast.error("Nom d'utilisateur ou mot de passe incorrect.");
+      return;
+    }
+
+    if (req.status === 500) {
+      toast.error(
+        "Une erreur s'est produite. \n Veuillez réessayer de vous connecter"
+      );
+      return;
+    }
+
+    const data = await req.json().catch((error) => {
+      toast.error(
+        "Une erreur s'est produite. \n Veuillez réessayer de vous connecter"
+      );
+      return;
+    });
+
+    // Stock the token in the local storage
+    localStorage.setItem("token", data.token);
+    localStorage.setItem('refreshToken', data.refreshToken);
+
+    navigate("/chat");
   }
 
   return (
