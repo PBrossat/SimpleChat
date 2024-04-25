@@ -3,6 +3,7 @@ import { createServer } from "node:http";
 import { createAccount } from "./routes/createAccount.js";
 import { login } from "./routes/login.js";
 import { researchUser } from "./routes/researchUser.js";
+import { refreshToken } from "./routes/refreshToken.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/api", createAccount);
 app.use("/api", login);
 app.use("/api", researchUser);
+app.use("/api", refreshToken);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
