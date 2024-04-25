@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 
 const saltRounds = 10; // number of rounds to generate the salt
-process.env.BCRYPT_SALT = bcrypt.genSaltSync(saltRounds); // always use the same salt
+const salt = bcrypt.genSalt(saltRounds);
 
 export async function hashPassword(password) {
   try {
     // Hash the password with the generated salt
-    const hashedPassword = await bcrypt.hash(password, process.env.BCRYPT_SALT);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     return hashedPassword;
   } catch (error) {
@@ -14,4 +14,3 @@ export async function hashPassword(password) {
     throw new Error("Error hashing password");
   }
 }
-
