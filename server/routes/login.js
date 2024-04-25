@@ -1,13 +1,15 @@
+import "dotenv/config";
+
 import { Router } from "express";
 import { getUser } from "../controllers/userController.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
 router.post("/login", async (req, res) => {
   const body = req.body;
 
-  //console.log("body:", body);
   // hash the password
   const username = body.username;
 
@@ -38,9 +40,18 @@ router.post("/login", async (req, res) => {
             // If the passwords match, send the user information to the client
 
             delete user.password; // don't send the password to the client
-            res.status(200).json(user);
+
+            const secret = process.env.ACCES_TOKEN_SECRET;
+            const token = jwt.sign(user, secret, { expiresIn: "10s" });
+            const refreshToken = jwt.sign(
+              user,
+              process.env.REFRESH_TOKEN_SECRET,
+              { expiresIn: "1d" } // longer expiration time than the first token
+            );
+
+            res.status(200).json({ user, token, refreshToken });
           } else {
-            res.status(401).send("Incorrect password");
+            res.status(401).send({ error: "Incorrect password" });
           }
         });
       }
