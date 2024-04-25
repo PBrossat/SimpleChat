@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../data/logo-SimpleChat.png";
 import "../style/Sigin.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export function SignIn() {
   const [username, setUsername] = useState("");
@@ -16,37 +17,73 @@ export function SignIn() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    // Verification of the name
+    if (name === "") {
+      toast.error("Le prénom est obligatoire");
+      return;
+    }
+
+    // Verification of the surname
+    if (surname === "") {
+      toast.error("Le nom est obligatoire");
+      return;
+    }
+
     //Verification username
     if (username === "") {
-      alert("Username is required");
+      toast.error("Le nom d'utilisateur est obligatoire");
+      return;
+    }
+
+    // Verification of the email
+    if (email === "") {
+      toast.error("L'email est obligatoire");
+      return;
+    }
+
+    // Verification of the password
+    if (password === "") {
+      toast.error("Le mot de passe est obligatoire");
+      return;
+    }
+
+    // Verification of the password confirmation
+    if (passwordConfirmation === "") {
+      toast.error("La confirmation du mot de passe est obligatoire");
       return;
     }
 
     // Verification of the password
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long");
+      toast.error("Le mot de passe doit contenir au moins 8 caractères");
       return;
     }
     if (!/[A-Z]/.test(password)) {
-      alert("Password must contain at least one uppercase letter");
+      toast.error(
+        "Le mot de passe doit contenir au moins une lettre majuscule"
+      );
       return;
     }
     if (!/[a-z]/.test(password)) {
-      alert("Password must contain at least one lowercase letter");
+      toast.error(
+        "Le mot de passe doit contenir au moins une lettre minuscule"
+      );
       return;
     }
     if (!/[0-9]/.test(password)) {
-      alert("Password must contain at least one number");
+      toast.error("Le mot de passe doit contenir au moins un chiffre");
       return;
     }
     if (!/[^A-Za-z0-9]/.test(password)) {
-      alert("Password must contain at least one special character");
+      toast.error(
+        "Le mot de passe doit contenir au moins un caractère spécial"
+      );
       return;
     }
 
     // password confirmation verification
     if (password !== passwordConfirmation) {
-      alert("Passwords do not match");
+      toast.error("Les deux mots de passe ne correspondent pas");
       return;
     }
 
@@ -60,30 +97,43 @@ export function SignIn() {
       body: JSON.stringify(user),
     })
       .then((response) => {
-        if (response.status === 200) {
-          alert("Votre compte a été créé avec succès");
-
-          // Add <p> element to the DOM to display the message
-          const p = document.createElement("p");
-          p.textContent = "Account created successfully";
-          document.body.appendChild(p);
-          setTimeout(() => {
-            p.remove();
-          }, 5000);
-
+        if (response.ok) {
           // Clear the form
+          setName("");
+          setSurname("");
           setUsername("");
           setEmail("");
           setPassword("");
+          setPasswordConfirmation("");
+
+          toast.success("Compte créé avec succès");
         } else {
-          alert(
-            "Votre compte n'a pas pu être créé, essayez avec une autre nom d'utilisateur ou un autre email"
-          );
+          response.text().then((errorMessage) => {
+            if (
+              response.status === 400 &&
+              errorMessage === "Email already exists"
+            ) {
+              toast.error(
+                "L'email que vous avez entré existe déjà. Veuillez utiliser un autre email."
+              );
+            } else if (
+              response.status === 400 &&
+              errorMessage === "Username already exists"
+            ) {
+              toast.error(
+                "Le nom d'utilisateur que vous avez choisi est déjà pris. Veuillez en choisir un autre."
+              );
+            } else {
+              toast.error(
+                "Une erreur s'est produite lors de la création de votre compte. Veuillez réessayer plus tard."
+              );
+            }
+          });
         }
       })
       .catch((error) => {
-        console.error(error);
-        alert(
+        console.error("Error:", error);
+        toast.error(
           "Une erreur s'est produite lors de la création de votre compte, veuillez réessayer plus tard"
         );
       });
@@ -112,7 +162,7 @@ export function SignIn() {
             type="text"
             className="form-control"
             placeholder="Nom"
-            value={name}
+            value={surname}
             onChange={(e) => setSurname(e.target.value)}
           />
 
@@ -120,7 +170,7 @@ export function SignIn() {
             type="text"
             className="form-control"
             placeholder="Nom d'utilisateur"
-            value={name}
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
 
@@ -163,6 +213,7 @@ export function SignIn() {
           </p>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../data/logo-SimpleChat.png";
+import toast, { Toaster } from "react-hot-toast";
 
 // Css import
 import "../style/Login.css";
@@ -8,11 +9,20 @@ import "../style/Login.css";
 export function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (username === "") {
+      toast.error("Le nom d'utilisateur est obligatoire");
+      return;
+    }
+
+    if (password === "") {
+      toast.error("Le mot de passe est obligatoire");
+      return;
+    }
 
     fetch("http://localhost:3001/api/login", {
       method: "POST",
@@ -22,18 +32,29 @@ export function LogIn() {
       body: JSON.stringify({ username, password }),
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.ok) {
           return response.json();
+        } else if (response.status === 401) {
+          return;
         } else {
-          throw new Error("Username or password incorrect");
+          throw new Error("An error occurred. Please try again later");
         }
       })
-      .then((user) => {
-        console.log("User:", user);
+      .then((data) => {
+        // if the user exists and the password is correct
+
+        // if the user don't have a name or surname in the database
+        if (data.name === "" || data.surname === "") {
+          toast.success("Connexion réussie.");
+        } else
+          toast.success(
+            "Connexion réussie. \n Bienvenue " + data.name + " " + data.surname
+          );
       })
       .catch((error) => {
-        console.error("Error:", error);
-        alert("An error occurred. Please try again later");
+        toast.error(
+          "Une erreur s'est produite. \n Veuillez réessayer de vous connecter"
+        );
       });
   }
 
@@ -75,6 +96,7 @@ export function LogIn() {
           </p>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }

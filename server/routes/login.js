@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
     .then((user) => {
       if (user.username === "") {
         // If the user does not exist, return an error
-        res.status(401).send("Username unknown");
+        res.status(401).send("No user with this username");
       } else {
         // If the user exists, compare the passwords
 

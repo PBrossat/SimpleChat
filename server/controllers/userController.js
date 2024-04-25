@@ -8,7 +8,13 @@ export function addUsers(user) {
     const db = new sqlite3.Database(DB_PATH);
 
     const sql = `INSERT INTO Users (username, password, email, name, surname) VALUES (?, ?, ?, ?, ?)`;
-    const values = [user.username, user.password, user.email, "", ""];
+    const values = [
+      user.username,
+      user.password,
+      user.email,
+      user.name,
+      user.surname,
+    ];
 
     db.run(sql, values, (error) => {
       db.close(); // Close the database connection
