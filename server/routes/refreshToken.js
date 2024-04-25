@@ -23,7 +23,7 @@ router.post("/refreshToken", async (req, res) => {
     delete data.exp;
 
     const token = jwt.sign(data, process.env.ACCES_TOKEN_SECRET, {
-      expiresIn: "10s",
+      expiresIn: "3m",
     });
     const refreshToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, {
       expiresIn: "1d",

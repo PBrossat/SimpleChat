@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
             delete user.password; // don't send the password to the client
 
             const secret = process.env.ACCES_TOKEN_SECRET;
-            const token = jwt.sign(user, secret, { expiresIn: "10s" });
+            const token = jwt.sign(user, secret, { expiresIn: "3m" });
             const refreshToken = jwt.sign(
               user,
               process.env.REFRESH_TOKEN_SECRET,
