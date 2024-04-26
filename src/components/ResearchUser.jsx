@@ -60,10 +60,10 @@ export function ResearchUser() {
       // If the status is not 200, it means the refresh token is invalid or expired
       if (req.status !== 200) {
         // If the refresh token is invalid, we redirect the user to the login page
-        toast.error("Vous devez vous connecter pour accéder à cette page");
+        toast.error("Vous devez vous re-connecter pour accéder à cette page");
         setInterval(() => {
           navigate("/login");
-        }, 300);
+        }, 500);
         localStorage.removeItem("token");
         localStorage.removeItem("refreshToken");
         return;
