@@ -173,7 +173,7 @@ export function getParticipants(conversationId) {
     const values = [conversationId];
 
     db.all(sql, values, (error, rows) => {
-      db.close(); // Ferme la connexion à la base de données
+      db.close(); // Close the database connection
 
       if (error) {
         console.error(
@@ -191,7 +191,7 @@ export function getParticipants(conversationId) {
             surname: row.surname,
           };
         });
-        resolve(participants); // Si aucune erreur n'est survenue, résout la promesse avec les participants
+        resolve(participants); // If there is no error, resolve the promise
       }
     });
   });
