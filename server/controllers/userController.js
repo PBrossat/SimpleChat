@@ -127,10 +127,10 @@ export function getActiveDiscussions(userId) {
     const db = new sqlite3.Database(DB_PATH);
 
     const sql = `
-      SELECT DISTINCT *
-      FROM Conversations
-      INNER JOIN Participants ON Conversations.id = Participants.conversation_id
-      WHERE Participants.user_id = (
+      SELECT c.id, c.name, c.type, c.creator_id, c.created_at
+      FROM Conversations c
+      JOIN Participants p ON c.id = p.conversation_id
+      WHERE p.user_id = ?; 
         SELECT id FROM Users s WHERE s.id = ?
       )
       ORDER BY Messages.timestamp DESC 
