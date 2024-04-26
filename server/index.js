@@ -4,6 +4,8 @@ import { createAccount } from "./routes/createAccount.js";
 import { login } from "./routes/login.js";
 import { researchUser } from "./routes/researchUser.js";
 import { refreshToken } from "./routes/refreshToken.js";
+import { getActiveDiscussions } from "./routes/getActiveDiscussions.js";
+import { getParticipants } from "./routes/getParticipants.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -29,6 +31,8 @@ app.use("/api", createAccount);
 app.use("/api", login);
 app.use("/api", researchUser);
 app.use("/api", refreshToken);
+app.use("/api", getActiveDiscussions);
+app.use("/api", getParticipants);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
