@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { hashPassword } from "../services/userService.js";
+import { hashPassword } from "../utils/utils.js";
 import { addUsers } from "../controllers/userController.js";
 
 const router = Router();
@@ -7,8 +7,6 @@ const router = Router();
 router.post("/create-account", async (req, res) => {
   //console.log(req.body);
   const body = req.body;
-
-  console.log("body", body);
 
   // hash the password
   const name = body.name;
@@ -40,7 +38,7 @@ router.post("/create-account", async (req, res) => {
         error.message.includes("UNIQUE constraint failed") &&
         error.message.includes("Users.username")
       ) {
-        res.status(400).send("Username already exists");
+        res.status(401).send("Username already exists");
         console.log("Username already exists");
         return;
       }
