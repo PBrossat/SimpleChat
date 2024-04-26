@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../data/logo-SimpleChat.png";
 import toast, { Toaster } from "react-hot-toast";
@@ -51,11 +51,29 @@ export function LogIn() {
       return;
     });
 
-    // Stock the token in the local storage
-    localStorage.setItem("token", data.token);
-    localStorage.setItem('refreshToken', data.refreshToken);
+    if (data.user.name === "" || data.user.surname === "") {
+      toast.success(
+        "Connexion reussie. \n Bienvenue " + data.user.username + " ! " // The user always has a username
+      );
+    } else {
+      toast.success(
+        "Connexion reussie. \n Bienvenue " +
+          data.user.name +
+          " " +
+          data.user.surname +
+          " ! "
+      );
+    }
 
-    navigate("/chat");
+    // Stock user and tokens in the local storage
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshToken", data.refreshToken);
+
+    // 3sec delay before redirecting to the chat page
+    setTimeout(() => {
+      navigate("/chat");
+    }, 2500);
   }
 
   return (
