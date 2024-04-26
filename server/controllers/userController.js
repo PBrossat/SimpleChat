@@ -148,6 +148,9 @@ export function getActiveDiscussions(userId) {
           return {
             id: row.id,
             name: row.name,
+            type: row.type,
+            created_at: row.created_at,
+            creator_id: row.creator_id,
           };
         });
         resolve(activeDiscussions); // If there is no error, resolve the promise
