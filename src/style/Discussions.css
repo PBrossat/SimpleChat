@@ -1,0 +1,25 @@
+.discussions-div {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  height: 100vh;
+  border: 1px solid black;
+  padding: 10px;
+  padding: 2px 10px 0 10px; /* Top, Right, Bottom, Left */
+  border-radius: 10px;
+}
+
+.title-and-button-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7px;
+}
+
+.title-discussions {
+  font-size: 24px;
+  font-weight: bold;
+  padding-right: 45px;
+}
