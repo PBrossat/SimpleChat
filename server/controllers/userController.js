@@ -131,9 +131,6 @@ export function getActiveDiscussions(userId) {
       FROM Conversations c
       JOIN Participants p ON c.id = p.conversation_id
       WHERE p.user_id = ?; 
-        SELECT id FROM Users s WHERE s.id = ?
-      )
-      ORDER BY Messages.timestamp DESC 
     `;
     const values = [userId];
 
