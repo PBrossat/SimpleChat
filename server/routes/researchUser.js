@@ -1,25 +1,15 @@
 import "dotenv/config";
 import { Router } from "express";
 import { getAllUsersContainingInput } from "../controllers/userController.js";
-import jwt from "jsonwebtoken";
+import { verifyToken } from "../utils/utils.js";
 
 const router = Router();
-
-// Function to verify the token and return the decoded value of the token
-async function verifyToken(token) {
-  try {
-    const decoded = jwt.verify(token, process.env.ACCES_TOKEN_SECRET);
-    return decoded;
-  } catch (err) {
-    console.error("Error verifying the token:", err);
-    return { error: "Unauthorized: invalid token" };
-  }
-}
 
 router.get("/researchUser/:query", async (req, res) => {
   // Check if the token is valid
   // Authorization : Bearer <token>
   const token = req.headers.authorization.split(" ")[1];
+
   let user = null;
   user = await verifyToken(token); // Verify and decode the token
 
@@ -28,7 +18,8 @@ router.get("/researchUser/:query", async (req, res) => {
   }
 
   const usernameToSearch = req.params.query;
-  getAllUsersContainingInput(usernameToSearch)
+  const userId = user.id;
+  getAllUsersContainingInput(usernameToSearch, userId)
     .then((users) => {
       res.status(200).json(users);
     })
