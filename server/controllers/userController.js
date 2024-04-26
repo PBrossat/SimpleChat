@@ -75,12 +75,28 @@ export function getUser(username) {
   });
 }
 
-export function getAllUsersContainingInput(username) {
+export function getAllUsersContainingInput(username, userId) {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(DB_PATH);
 
-    const sql = `SELECT * FROM Users WHERE username LIKE ?`;
-    const values = [`%${username}%`];
+    // Get all users whose username contains the input (order by users with whom the user has already spoken and then by the others)
+    const sql = `
+      SELECT DISTINCT u.id, u.username, u.email, u.name, u.surname
+      FROM Users u
+      LEFT JOIN Participants p ON u.id = p.user_id
+      LEFT JOIN Conversations c ON p.conversation_id = c.id
+      WHERE u.username LIKE ?
+      ORDER BY 
+        CASE 
+          WHEN EXISTS (
+            SELECT 1 FROM Participants p1
+            JOIN Participants p2 ON p1.conversation_id = p2.conversation_id
+            WHERE p1.user_id = ? AND p2.user_id = u.id
+          ) THEN 0
+          ELSE 1
+        END
+    `;
+    const values = [`%${username}%`, userId];
 
     db.all(sql, values, (error, rows) => {
       db.close(); // Close the database connection
@@ -101,6 +117,81 @@ export function getAllUsersContainingInput(username) {
           };
         });
         resolve(users); // If there is no error, resolve the promise
+      }
+    });
+  });
+}
+
+export function getActiveDiscussions(userId) {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(DB_PATH);
+
+    const sql = `
+      SELECT DISTINCT *
+      FROM Conversations
+      INNER JOIN Participants ON Conversations.id = Participants.conversation_id
+      WHERE Participants.user_id = (
+        SELECT id FROM Users s WHERE s.id = ?
+      )
+      ORDER BY Messages.timestamp DESC 
+    `;
+    const values = [userId];
+
+    db.all(sql, values, (error, rows) => {
+      db.close(); // Close the database connection
+
+      if (error) {
+        console.error(
+          "Error getting active discussions from the database:",
+          error
+        );
+        reject(error);
+      } else {
+        const activeDiscussions = rows.map((row) => {
+          return {
+            id: row.id,
+            name: row.name,
+          };
+        });
+        resolve(activeDiscussions); // If there is no error, resolve the promise
+      }
+    });
+  });
+}
+
+// Function to get the participants of a conversation
+export function getParticipants(conversationId) {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(DB_PATH);
+
+    const sql = `
+      SELECT Users.id, Users.username, Users.email, Users.name, Users.surname
+      FROM Users
+      INNER JOIN Participants ON Users.id = Participants.user_id
+      WHERE Participants.conversation_id = ?
+    `;
+    const values = [conversationId];
+
+    db.all(sql, values, (error, rows) => {
+      db.close(); // Ferme la connexion à la base de données
+
+      if (error) {
+        console.error(
+          "Erreur lors de la récupération des participants depuis la base de données :",
+          error
+        );
+        reject(error);
+      } else {
+        const participants = rows.map((row) => {
+          return {
+            id: row.id,
+            username: row.username,
+            email: row.email,
+            name: row.name,
+            surname: row.surname,
+          };
+        });
+        resolve(participants); // Si aucune erreur n'est survenue, résout la promesse avec les participants
       }
     });
   });
