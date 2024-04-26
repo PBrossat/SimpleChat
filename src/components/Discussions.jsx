@@ -2,6 +2,7 @@ import { ResearchUser } from "./ResearchUser";
 import { CreateDiscussion } from "./CreateDiscussion";
 import { ListDiscussion } from "./ListDiscussion";
 import "../style/Discussions.css";
+import Divider from "@mui/material/Divider";
 
 export function Discussions() {
   return (
@@ -16,6 +17,7 @@ export function Discussions() {
       <ResearchUser />
       {/* Liste des discussions */}
       <ListDiscussion />
+      <Divider flexItem />
     </div>
   );
 }
