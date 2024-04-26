@@ -21,6 +21,11 @@ router.get("/getParticipants/:query", async (req, res) => {
   getParticipants(conversationId)
     .then((participants) => {
       res.status(200).json(participants);
+      console.log(
+        "Participants sent to the client for the conversation : ",
+        conversationId
+      );
+      console.log(participants);
     })
     .catch((error) => {
       console.error("Error getting participants from the database:", error);

@@ -22,6 +22,8 @@ router.get("/getActiveDiscussions", async (req, res) => {
   getActiveDiscussions(userId)
     .then((discussions) => {
       res.status(200).json(discussions);
+      console.log("Active discussions sent to the client");
+      console.log(discussions);
     })
     .catch((error) => {
       console.error(
