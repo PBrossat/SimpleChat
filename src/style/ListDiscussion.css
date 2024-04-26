@@ -5,4 +5,11 @@
 
 .liste-disccusion {
   padding-top: 10px;
+  height: 80%;
+  width: 103%;
+  text-align: center;
+}
+
+.conversation-clicked {
+  background-color: #f4f4f4;
 }
