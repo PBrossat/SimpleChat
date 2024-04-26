@@ -14,7 +14,7 @@ export function SignIn() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // Verification of the name
@@ -89,54 +89,42 @@ export function SignIn() {
 
     const user = { name, surname, username, email, password };
 
-    fetch("http://localhost:3001/api/create-account", {
-      method: "POST", // POST request to create a new account 
+    const req = await fetch("http://localhost:3001/api/create-account", {
+      method: "POST", // POST request to create a new account
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Clear the form
-          setName("");
-          setSurname("");
-          setUsername("");
-          setEmail("");
-          setPassword("");
-          setPasswordConfirmation("");
+    });
 
-          toast.success("Compte créé avec succès");
-        } else {
-          response.text().then((errorMessage) => {
-            if (
-              response.status === 400 &&
-              errorMessage === "Email already exists"
-            ) {
-              toast.error(
-                "L'email que vous avez entré existe déjà. Veuillez utiliser un autre email."
-              );
-            } else if (
-              response.status === 400 &&
-              errorMessage === "Username already exists"
-            ) {
-              toast.error(
-                "Le nom d'utilisateur que vous avez choisi est déjà pris. Veuillez en choisir un autre."
-              );
-            } else {
-              toast.error(
-                "Une erreur s'est produite lors de la création de votre compte. Veuillez réessayer plus tard."
-              );
-            }
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        toast.error(
-          "Une erreur s'est produite lors de la création de votre compte, veuillez réessayer plus tard"
-        );
-      });
+    if (req.status === 500) {
+      toast.error(
+        "Une erreur s'est produite lors de la création de votre compte. \n Veuillez réessayer plus tard"
+      );
+      return;
+    }
+
+    if (req.status === 400) {
+      toast.error("L'email que vous avez entré existe déjà.");
+      return;
+    }
+
+    if (req.status === 401) {
+      toast.error("Le nom d'utilisateur que vous avez entré existe déjà.");
+      return;
+    }
+
+    toast.success("Compte créé avec succès");
+    setName("");
+    setSurname("");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirmation("");
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   }
 
   return (
