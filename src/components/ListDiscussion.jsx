@@ -87,7 +87,7 @@ export function ListDiscussion() {
       } finally {
         setTimeout(() => {
           setIsLoading(false);
-        }, 1000); // Set the loading state to false after 1 second
+        }, 500); // Set the loading state to false after 0.5 second
       }
     }
 
@@ -109,7 +109,7 @@ export function ListDiscussion() {
 
     return (
       <List sx={style}>
-        {discussions.length == 0 ? (
+        {discussions.length === 0 ? (
           <ListItem>
             <ListItemText primary="Aucune discussion" />
           </ListItem>
@@ -132,7 +132,7 @@ export function ListDiscussion() {
                 }
                 secondary={
                   discussion.type === 1
-                    ? null
+                    ? "Groupe"
                     : discussion.participants.find(
                         (participant) => participant.id !== currentUserId
                       ).surname
