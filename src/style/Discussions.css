@@ -23,3 +23,26 @@
   font-weight: bold;
   padding-right: 45px;
 }
+
+.bottom-part-discussion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-and-surname-bottom-page {
+  display: flex;
+  flex-direction: column;
+  margin-right: 126px;
+}
+
+.name-part-discussion {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.surname-part-discussion {
+  font-size: 13px;
+  margin: 0;
+}

@@ -1,0 +1,18 @@
+.button-deconnexion {
+  /* position: absolute; */
+  height: 30px;
+  width: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgb(220, 220, 220);
+  transition-duration: 0.3s;
+  border: none;
+}
+
+.button-deconnexion:hover {
+  background-color: rgb(218, 98, 98);
+}
