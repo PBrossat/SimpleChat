@@ -3,6 +3,7 @@ import { CreateDiscussion } from "./CreateDiscussion";
 import { ListDiscussion } from "./ListDiscussion";
 import "../style/Discussions.css";
 import Divider from "@mui/material/Divider";
+import { BottomPartDiscussion } from "./BottomPartDiscussion";
 
 export function Discussions() {
   return (
@@ -18,6 +19,7 @@ export function Discussions() {
       {/* Liste des discussions */}
       <ListDiscussion />
       <Divider flexItem />
+      <BottomPartDiscussion />
     </div>
   );
 }
