@@ -122,9 +122,7 @@ export function SignIn() {
     setPassword("");
     setPasswordConfirmation("");
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
+    navigate("/login");
   }
 
   return (
