@@ -6,7 +6,7 @@ import { verifyToken } from "../utils/utils";
 import { BackButtonResearch } from "./BackButtonResearch";
 import { InputResearchUser } from "./InputResearchUser";
 
-export function ResearchUser() {
+export function ResearchUser(props) {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [isMouseIn, setIsMouseIn] = useState(false);
 
@@ -23,23 +23,24 @@ export function ResearchUser() {
 
     // If the input is empty, we don't need to search for a user
     if (value.trim() === "") {
-      return;
+      return props.setResearchResultsList([]);
     }
 
     // We create a new search timeout
     setSearchTimeout(
       setTimeout(() => {
         fetchUser(value);
-        console.log(value);
       }, 300)
     );
   }
 
   function changeStyleOfInput() {
+    props.setVisibilityOfDisucssionList(false);
     setIsMouseIn(true);
   }
 
   function restoreDefaultStyle() {
+    props.setVisibilityOfDisucssionList(true);
     setIsMouseIn(false);
   }
 
@@ -64,7 +65,7 @@ export function ResearchUser() {
     if (req.status === 200) {
       // If the request is successful, we can get the user data
       const users = await req.json();
-      console.log(users);
+      props.setResearchResultsList(users);
     }
   }
 
