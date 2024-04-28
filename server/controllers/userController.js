@@ -75,7 +75,7 @@ export function getUser(username) {
   });
 }
 
-export function getAllUsersContainingInput(username, userId) {
+export function getAllUsersContainingInput(username, name, surname, userId) {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(DB_PATH);
 
@@ -85,7 +85,7 @@ export function getAllUsersContainingInput(username, userId) {
       FROM Users u
       LEFT JOIN Participants p ON u.id = p.user_id
       LEFT JOIN Conversations c ON p.conversation_id = c.id
-      WHERE u.username LIKE ?
+      WHERE u.username LIKE ? OR u.name LIKE ? OR u.surname LIKE ?
       ORDER BY 
         CASE 
           WHEN EXISTS (
@@ -96,7 +96,7 @@ export function getAllUsersContainingInput(username, userId) {
           ELSE 1
         END
     `;
-    const values = [`%${username}%`, userId];
+    const values = [`%${username}%`, `%${name}%`, `%${surname}%`, userId];
 
     db.all(sql, values, (error, rows) => {
       db.close(); // Close the database connection

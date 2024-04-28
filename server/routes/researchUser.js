@@ -18,8 +18,15 @@ router.get("/researchUser/:query", async (req, res) => {
   }
 
   const usernameToSearch = req.params.query;
+  const nameToSearch = req.params.query;
+  const surnameToSearch = req.params.query;
   const userId = user.id;
-  getAllUsersContainingInput(usernameToSearch, userId)
+  getAllUsersContainingInput(
+    usernameToSearch,
+    nameToSearch,
+    surnameToSearch,
+    userId
+  )
     .then((users) => {
       res.status(200).json(users);
     })
