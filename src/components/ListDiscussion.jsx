@@ -17,6 +17,7 @@ import group from "../data/group.png";
 export function ListDiscussion() {
   const [discussions, setDiscussions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
 
   async function fetchDiscussions() {
@@ -84,19 +85,26 @@ export function ListDiscussion() {
           });
         }
 
+        // Set the discussions in the state
         setDiscussions(ListDiscussions);
       } catch (error) {
         toast.error(
           "Une erreur s'est produite lors de la récupération de vos discussions."
         );
-      } finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500); // Set the loading state to false after 0.5 second
       }
     }
 
     fetchData();
+
+    const setTimeOut = setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // Set the loading state to false after 0.5 second
+
+    return () => {
+      // Clear the timeout when the component is unmounted
+      clearTimeout(setTimeOut);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function displayListDiscussion() {
