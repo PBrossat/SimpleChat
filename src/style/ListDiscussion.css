@@ -5,6 +5,7 @@
 
 .liste-disccusion {
   padding-top: 10px;
+  max-width: 100%;
   height: 80%;
   width: 103%;
   text-align: center;
