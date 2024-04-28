@@ -1,11 +1,27 @@
+import React, { useState } from "react";
 import { ResearchUser } from "./ResearchUser";
 import { CreateDiscussion } from "./CreateDiscussion";
 import { ListDiscussion } from "./ListDiscussion";
 import "../style/Discussions.css";
 import Divider from "@mui/material/Divider";
 import { BottomPartDiscussion } from "./BottomPartDiscussion";
+import { ListResultResearchUser } from "./ListResultResearchUser";
 
 export function Discussions() {
+  const [isListVisible, setIsListVisible] = useState(true);
+  const [listOfUsersAfterResearch, setListOfUsersAfterResearch] = useState([]);
+
+  // This function is used to set the visibility of the list of discussions
+  // when the user is searching for a user : the list of discussions is hidden else it is visible
+  function setVisibilityOfList(data_from_input_research_user) {
+    setIsListVisible(data_from_input_research_user);
+  }
+
+  // T
+  function setResearchResults(data_from_input_research_user) {
+    setListOfUsersAfterResearch(data_from_input_research_user);
+  }
+
   return (
     <div className="discussions-div">
       <div className="title-and-button-div">
@@ -15,9 +31,17 @@ export function Discussions() {
       </div>
       {/* input permettant de rechercher un user a qui on a parler ou non, les premiers résultats sont les personnes avec qui on a déjà discutter
         puis on retrouve les utilisateurs avec qui on a pas encore parler*/}
-      <ResearchUser />
+      <ResearchUser
+        setVisibilityOfDisucssionList={setVisibilityOfList}
+        setResearchResultsList={setResearchResults}
+      />
       {/* Liste des discussions */}
-      <ListDiscussion />
+      {isListVisible && <ListDiscussion />}
+      {!isListVisible && (
+        <ListResultResearchUser
+          listOfUsersAfterResearch={listOfUsersAfterResearch}
+        />
+      )}
       <Divider flexItem />
       <BottomPartDiscussion />
     </div>
