@@ -8,6 +8,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { verifyToken } from "../utils/utils";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import { Divider } from "@mui/material";
+import alone from "../data/alone.png";
+import group from "../data/group.png";
 
 export function ListDiscussion() {
   const [discussions, setDiscussions] = useState([]);
@@ -98,17 +103,15 @@ export function ListDiscussion() {
     const currentUserId = JSON.parse(localStorage.getItem("user")).id;
 
     const style = {
-      p: 0,
       width: "100%",
-      maxWidth: 360,
-      borderRadius: 2,
-      border: "1px solid",
       borderColor: "divider",
       backgroundColor: "background.paper",
+      overflow: "auto",
+      maxHeight: "90%",
     };
 
     return (
-      <List sx={style}>
+      <List sx={style} subheader={<li />}>
         {discussions.length === 0 ? (
           <ListItem>
             <ListItemText primary="Aucune discussion" />
@@ -120,6 +123,12 @@ export function ListDiscussion() {
               button
               onClick={() => console.log("clicked")}
             >
+              <ListItemAvatar>
+                <Avatar
+                  src={discussion.type === 1 ? group : alone}
+                  style={{ width: "35px", height: "35px" }} // Modify the size of the image here
+                ></Avatar>
+              </ListItemAvatar>
               <ListItemText
                 primary={
                   <strong>
@@ -148,6 +157,7 @@ export function ListDiscussion() {
   return (
     <div className="liste-disccusion">
       <h1 className="title-liste-discussion">Liste de vos discussions</h1>
+      <Divider />
       <Box>{isLoading ? <CircularProgress /> : displayListDiscussion()}</Box>
       <Toaster />
     </div>
