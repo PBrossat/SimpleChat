@@ -1,0 +1,18 @@
+.back-button-research {
+  /* position: absolute; */
+  height: 30px;
+  width: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  transition-duration: 0.3s;
+  border: none;
+}
+
+.back-button-research:hover {
+  background-color: rgb(169, 169, 169);
+}
