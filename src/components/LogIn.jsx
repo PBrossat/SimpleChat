@@ -68,6 +68,7 @@ export function LogIn() {
     // Stock user and tokens in the local storage
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.token);
+    console.log(data.token);
     localStorage.setItem("refreshToken", data.refreshToken);
 
     // 3sec delay before redirecting to the chat page

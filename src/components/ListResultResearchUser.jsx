@@ -24,21 +24,30 @@ export function ListResultResearchUser(props) {
           </ListItem>
         ) : (
           // Display the list of users with their name and surname
-          listToDisplay.map((user) => (
-            <ListItem key={user.id} button onClick={() => console.log(user)}>
-              <ListItemText
-                primary={
-                  <strong>
-                    {/* If I'm the user, display "vous" */}
-                    {user.username === currentUser.username
-                      ? "Vous"
-                      : user.username}
-                  </strong>
-                }
-                secondary={user.name + " " + user.surname}
-              />
-            </ListItem>
-          ))
+          listToDisplay.map(
+            (user) => (
+              console.log(user),
+              (
+                <ListItem
+                  key={user.id}
+                  button
+                  onClick={() => console.log(user)}
+                >
+                  <ListItemText
+                    primary={
+                      <strong>
+                        {/* If I'm the user, display "vous" */}
+                        {user.username === currentUser.username
+                          ? "Vous"
+                          : user.username}
+                      </strong>
+                    }
+                    secondary={user.name + " " + user.surname}
+                  />
+                </ListItem>
+              )
+            )
+          )
         )}
       </List>
     );
