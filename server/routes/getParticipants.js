@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/utils.js";
-import { getParticipants } from "../controllers/userController.js";
+import { getParticipants } from "../controllers/discussionController.js";
 
 const router = Router();
 
