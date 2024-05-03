@@ -16,7 +16,7 @@ export function addDiscussion(discussion) {
     const db = new sqlite3.Database(DB_PATH);
 
     // created_at is a field in the database that is automatically filled with the current date and time
-    const sql = `INSERT INTO Conversations (name, type, reator_id) VALUES (?, ?, ?)`;
+    const sql = `INSERT INTO Conversations (name, type, creator_id) VALUES (?, ?, ?)`;
     const values = [discussion.name, discussion.type, discussion.creator_id];
 
     db.run(sql, values, function (error) {
