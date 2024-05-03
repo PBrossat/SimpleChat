@@ -21,6 +21,11 @@ router.post("/createDiscussion", async (req, res) => {
   const creatorId = user.id; // the creator is the one who called the route
   const nameDiscussion = body.nameDiscussion;
   const participants = body.participants;
+  // add current user if not already in the list
+  if (!participants.includes(user)) {
+    participants.push(user);
+  }
+
   const typeDiscussion = participants.length <= 2 ? "0" : "1"; // 0 for private, 1 for group
 
   const discussion = {
@@ -47,4 +52,4 @@ router.post("/createDiscussion", async (req, res) => {
   }
 });
 
-
+export { router as createDiscussion };
