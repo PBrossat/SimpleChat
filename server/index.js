@@ -28,13 +28,14 @@ app.get("/", (req, res) => {
 });
 
 // routes of the api application
-app.use("/api", createAccount);
-app.use("/api", login);
-app.use("/api", researchUser);
-app.use("/api", refreshToken);
-app.use("/api", getActiveDiscussions);
-app.use("/api", getParticipants);
-app.use("/api", createDiscussion);
+app
+  .use("/api", createAccount)
+  .use("/api", login)
+  .use("/api", researchUser)
+  .use("/api", refreshToken)
+  .use("/api", getActiveDiscussions)
+  .use("/api", getParticipants)
+  .use("/api", createDiscussion);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");

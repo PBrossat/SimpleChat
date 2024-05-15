@@ -68,7 +68,7 @@ export function LogIn() {
     // Stock user and tokens in the local storage
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.token);
-    console.log(data.token);
+    // console.log(data.token);
     localStorage.setItem("refreshToken", data.refreshToken);
 
     // 3sec delay before redirecting to the chat page
@@ -76,6 +76,12 @@ export function LogIn() {
       navigate("/chat");
     }, 2500);
   }
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="LogIn">
@@ -89,30 +95,40 @@ export function LogIn() {
         </p>
 
         <form className="form-login" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={username}
-            placeholder="Nom d'utilisateur"
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <div className="input-container">
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              placeholder="Nom d'utilisateur"
+              onChange={(e) => setUsername(e.target.value)}
+            />
 
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            placeholder="Mot de passe"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
+            <input
+              type={showPassword ? "text" : "password"} // Show password if showPassword is true
+              className="form-control"
+              id="password"
+              value={password}
+              placeholder="Mot de passe"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <button type="submit" className="btn primary-btn">
             Continuer
           </button>
-          <p className="underlined-link" onClick={() => navigate("/signin")}>
-            Pas de compte ?
-          </p>
+          <div className="div-underlined-link">
+            <p
+              id="p-left"
+              className="underlined-link"
+              onClick={() => navigate("/signin")}
+            >
+              Pas de compte ?
+            </p>
+            <p className="underlined-link" onClick={handleShowPassword}>
+              Afficher le mot de passe
+            </p>
+          </div>
         </form>
       </div>
       <Toaster />

@@ -11,8 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import { Divider } from "@mui/material";
-import alone from "../data/alone.png";
-import group from "../data/group.png";
+import { Users, User } from "lucide-react";
 
 export function ListDiscussion() {
   const [discussions, setDiscussions] = useState([]);
@@ -133,9 +132,14 @@ export function ListDiscussion() {
             >
               <ListItemAvatar>
                 <Avatar
-                  src={discussion.type === 1 ? group : alone}
-                  style={{ width: "35px", height: "35px" }} // Modify the size of the image here
-                ></Avatar>
+                  sx={{
+                    width: "35px",
+                    height: "35px",
+                    backgroundColor: "primary.main",
+                  }}
+                >
+                  {discussion.type === 1 ? <Users /> : <User />}
+                </Avatar>
               </ListItemAvatar>
               <ListItemText
                 primary={
