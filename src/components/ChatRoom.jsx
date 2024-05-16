@@ -1,5 +1,7 @@
 import "./Discussions.jsx";
 import { Discussions } from "./Discussions.jsx";
+import { Chat } from "./Chat.jsx";
+
 import "../style/ChatRoom.css";
 
 export function ChatRoom() {
@@ -11,6 +13,7 @@ export function ChatRoom() {
       {/* barre latérale  */}
       {/* liste des discussions */}
       <Discussions />
+      <Chat />
       {/* chat */}
     </div>
   );
