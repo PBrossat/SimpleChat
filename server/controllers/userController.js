@@ -37,6 +37,40 @@ export function addUsers(user) {
   });
 }
 
+/**
+ * Method to get all users from the database
+ * @returns {Promise} A promise that returns an array of users
+ */
+export function getUsers() {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(DB_PATH);
+
+    const sql = `SELECT * FROM Users`;
+
+    db.all(sql, [], (error, rows) => {
+      db.close(); // Close the database connection
+
+      if (error) {
+        console.error("Error getting users from the database:", error);
+        reject(error);
+      } else {
+        const users = rows.map((row) => {
+          // Send an array of users to the client
+          return {
+            id: row.id,
+            username: row.username,
+            email: row.email,
+            name: row.name,
+            surname: row.surname,
+            // don't send the password to the client
+          };
+        });
+        resolve(users); // If there is no error, resolve the promise
+      }
+    });
+  });
+}
+
 export function getUser(username) {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(DB_PATH);

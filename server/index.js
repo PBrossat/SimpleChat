@@ -7,6 +7,7 @@ import { refreshToken } from "./routes/refreshToken.js";
 import { getActiveDiscussions } from "./routes/getActiveDiscussions.js";
 import { getParticipants } from "./routes/getParticipants.js";
 import { createDiscussion } from "./routes/createDiscussion.js";
+import { getUsers } from "./routes/getUsers.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -35,7 +36,8 @@ app
   .use("/api", refreshToken)
   .use("/api", getActiveDiscussions)
   .use("/api", getParticipants)
-  .use("/api", createDiscussion);
+  .use("/api", createDiscussion)
+  .use("/api", getUsers);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
