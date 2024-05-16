@@ -104,7 +104,7 @@ export function ListDiscussion() {
       clearTimeout(setTimeOut);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate]);
 
   function displayListDiscussion() {
     const currentUserId = JSON.parse(localStorage.getItem("user")).id;
