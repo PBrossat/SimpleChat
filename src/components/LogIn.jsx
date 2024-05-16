@@ -80,7 +80,10 @@ export function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
-    setShowPassword(!showPassword);
+    // If the input is not empty, show the password
+    if (password !== "") {
+      setShowPassword(!showPassword);
+    }
   };
 
   return (
@@ -126,7 +129,9 @@ export function LogIn() {
               Pas de compte ?
             </p>
             <p className="underlined-link" onClick={handleShowPassword}>
-              Afficher le mot de passe
+              {showPassword
+                ? "Cacher le mot de passe"
+                : "Afficher le mot de passe"}
             </p>
           </div>
         </form>
