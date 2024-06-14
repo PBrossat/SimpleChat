@@ -9,6 +9,7 @@ import "../style/Login.css";
 export function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -77,7 +78,7 @@ export function LogIn() {
     }, 2500);
   }
 
-  const [showPassword, setShowPassword] = useState(false);
+  
 
   const handleShowPassword = () => {
     // If the input is not empty, show the password

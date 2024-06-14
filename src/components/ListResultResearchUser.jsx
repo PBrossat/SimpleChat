@@ -4,6 +4,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 
 export function ListResultResearchUser(props) {
+  console.log(props.listOfUsersAfterResearch);
   const listToDisplay = props.listOfUsersAfterResearch;
   const [currentUser] = useState(JSON.parse(localStorage.getItem("user")));
 

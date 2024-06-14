@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import { BottomPartDiscussion } from "./BottomPartDiscussion";
 import { ListResultResearchUser } from "./ListResultResearchUser";
 
-export function Discussions() {
+export function Discussions(props) {
   const [isListVisible, setIsListVisible] = useState(true);
   const [listOfUsersAfterResearch, setListOfUsersAfterResearch] = useState([]);
 
@@ -17,9 +17,13 @@ export function Discussions() {
     setIsListVisible(data_from_input_research_user);
   }
 
-  // T
+
   function setResearchResults(data_from_input_research_user) {
     setListOfUsersAfterResearch(data_from_input_research_user);
+  }
+
+  function setInputCreateDiscussionVisible(data_from_button_create_discussion) {
+    props.setIsCreateDiscussionInputVisible(data_from_button_create_discussion);
   }
 
   return (
@@ -27,7 +31,9 @@ export function Discussions() {
       <div className="title-and-button-div">
         <h1 className="title-discussions">Discussions</h1>
         {/* Bouton pour créer une conversation de groupe */}
-        <CreateDiscussion />
+        <CreateDiscussion 
+          setIsInputCreateDiscussionVisible={setInputCreateDiscussionVisible} 
+          isCreateDiscussionInputVisible={props.isCreateDiscussionInputVisible}/>
       </div>
       {/* input permettant de rechercher un user a qui on a parler ou non, les premiers résultats sont les personnes avec qui on a déjà discutter
         puis on retrouve les utilisateurs avec qui on a pas encore parler*/}

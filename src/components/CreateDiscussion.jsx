@@ -1,10 +1,12 @@
 import "../style/CreateDiscussion.css";
 import Tooltip from "@mui/material/Tooltip";
 
-export function CreateDiscussion() {
+export function CreateDiscussion(props) {
+  
   function handleClick() {
-    console.log("Création d'une discussion");
+    props.setIsInputCreateDiscussionVisible(!props.isCreateDiscussionInputVisible);
   }
+
   return (
     <div className="create-discussion-div">
       <Tooltip title="Créer une discussion" placement="right">

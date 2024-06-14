@@ -4,6 +4,7 @@ import {
   addDiscussion,
   addParticipantToDiscussion,
 } from "../controllers/discussionController.js";
+import { type } from "@testing-library/user-event/dist/cjs/utility/type.js";
 
 const router = Router();
 
@@ -19,15 +20,17 @@ router.post("/createDiscussion", async (req, res) => {
 
   const body = req.body;
   const creatorId = user.id; // the creator is the one who called the route
-  const nameDiscussion = body.nameDiscussion;
   const participants = body.participants;
-  // add current user if not already in the list
+
+  // add current user if not already in the list (shoyld not happen but just in case)
   if (!participants.includes(user)) {
     participants.push(user);
   }
 
   const typeDiscussion = participants.length <= 2 ? "0" : "1"; // 0 for private, 1 for group
 
+  const nameDiscussion = typeDiscussion === "0" ? null : body.nameDiscussion; // if it's a private discussion, we don't need a name
+  
   const discussion = {
     creator_id: creatorId,
     name: nameDiscussion,

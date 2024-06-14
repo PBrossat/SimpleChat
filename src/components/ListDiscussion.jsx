@@ -17,6 +17,8 @@ export function ListDiscussion() {
   const [discussions, setDiscussions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate();
 
   async function fetchDiscussions() {
@@ -110,12 +112,31 @@ export function ListDiscussion() {
     const currentUserId = JSON.parse(localStorage.getItem("user")).id;
 
     const style = {
-      width: "100%",
+      width: "95%",
       borderColor: "divider",
       backgroundColor: "background.paper",
       overflow: "auto",
       maxHeight: "90%",
     };
+
+    // Format the secondary text for a group discussion (display the two first participants and add "..." if there are more than 2 participants)
+    const formatGroupeSecondaryText = (participants) => {
+      // Remove the current user from the list of participants
+      const participantsWithoutCurrentUser = participants.filter(
+        (participant) => participant.id !== currentUser.id
+      );
+
+      let formattedParticipants = participantsWithoutCurrentUser
+        .slice(0, 2) // Get the two first participants
+        .map((participant) => `${participant.name} ${participant.surname}`)
+        .join(", ");
+
+      if (participantsWithoutCurrentUser.length > 2) {
+        formattedParticipants += ", ...";
+      }
+
+      return formattedParticipants;
+    }
 
     return (
       <List sx={style} subheader={<li />}>
@@ -153,7 +174,7 @@ export function ListDiscussion() {
                 }
                 secondary={
                   discussion.type === 1
-                    ? "Groupe"
+                    ? formatGroupeSecondaryText(discussion.participants)
                     : discussion.participants.find(
                         (participant) => participant.id !== currentUserId
                       ).surname
