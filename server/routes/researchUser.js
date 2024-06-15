@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv/config.js";
 import { Router } from "express";
 import { getAllUsersContainingInput } from "../controllers/userController.js";
 import { verifyToken } from "../utils/utils.js";

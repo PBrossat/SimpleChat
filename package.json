@@ -23,18 +23,21 @@
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
     "rsuite": "^5.64.0",
     "sqlite3": "^5.1.7",
     "web-vitals": "^4.1.1"
   },
   "scripts": {
     "start": "concurrently \"npm run start-front\" \"npm run start-back\"",
-    "start-front": "BROWSER=none react-scripts start",
+    "start-front": "react-scripts start",
     "start-back": "nodemon server/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "resolutions": {
+  "react": "^17.0.0",
+  "react-dom": "^17.0.0"
+},
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -54,6 +57,8 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "react-scripts": "^5.0.1",
+    "webpack": "^5.92.0"
   }
 }
