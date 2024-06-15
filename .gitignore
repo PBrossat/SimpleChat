@@ -26,3 +26,6 @@ yarn-error.log*
 // Database
 DB_Simple_Chat.db 
 DB_Tables.sql
+
+package-lock.json
+node_modules
