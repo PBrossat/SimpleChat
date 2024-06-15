@@ -1,0 +1,22 @@
+.MessageInput{
+    position: absolute;
+    bottom: 20px;
+    align-items: center;
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.inputMes{
+    width: 45%;
+    height: fit-content(10%);
+    
+    
+}
+
+.sendButton{
+
+}

@@ -1,13 +1,18 @@
-import { CreateDiscussionInput } from "./CreateDiscussionInput";
-import "../style/Chat.css";
 
-export function Chat(props) {
+import "../style/Chat.css";
+import { useState } from "react";
+import { MessagesBox } from "./MessagesBox.jsx";
+import { MessageInput } from "./MessageInput.jsx";
+
+export function Chat() {
+
+  const [isCreateDiscussionInputVisible, setIsCreateDiscussionInputVisible] = useState(false);
   return (
     <div className="Chat-div">
-      <CreateDiscussionInput 
-        displayCreateDisucssionInput={props.displayCreateDisucssionInput}
-        setIsCreateDiscussionInputVisible={props.setIsCreateDiscussionInputVisible}
-      />
+      <MessagesBox 
+      displayCreateDisucssionInput={isCreateDiscussionInputVisible} 
+      setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}/>
+      <MessageInput/>
     </div>
   );
 }

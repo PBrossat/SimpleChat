@@ -4,6 +4,8 @@ import { Chat } from "./Chat.jsx";
 import { useState } from "react";
 
 import "../style/ChatRoom.css";
+import { MessageInput } from "./MessageInput.jsx";
+import { MessagesBox } from "./MessagesBox.jsx";
 
 export function ChatRoom() {
   // Refuse to go back to the previous page (work only twice)
@@ -20,9 +22,9 @@ export function ChatRoom() {
         setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
       />
       <Chat
-        displayCreateDisucssionInput={isCreateDiscussionInputVisible} 
-        setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
+        
       />
+      
       {/* chat */}
     </div>
   );

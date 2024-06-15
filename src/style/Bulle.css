@@ -1,0 +1,32 @@
+
+
+.message-bubble {
+    padding: 15px;
+    font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    word-wrap: break-word;
+    width: fit-content;
+    
+    
+    
+    
+}
+.in{
+    background-color: #d8d7d8;
+    color: rgb(0, 0, 0);
+    margin-left: 10px;
+
+    
+    
+  
+}
+.out{
+    background-color: #0084ff;
+    color: white;
+    margin-right: 5px;
+    
+
+}
+
