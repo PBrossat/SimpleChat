@@ -15,7 +15,7 @@ export function MessagesBox(props) {
     useEffect(() => {
       const handleScroll = () => {
       const scrollTop = containerRef.current.scrollTop;
-      console.log("Scroll position:", scrollTop);
+      //console.log("Scroll position:", scrollTop);
       // Do something with the scroll position
       };
 

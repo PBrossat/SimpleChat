@@ -5,11 +5,13 @@ import { login } from "./routes/login.js";
 import { researchUser } from "./routes/researchUser.js";
 import { refreshToken } from "./routes/refreshToken.js";
 import { getActiveDiscussions } from "./routes/getActiveDiscussions.js";
+import { sendMessages } from "./routes/sendMessage.js";
 import { getParticipants } from "./routes/getParticipants.js";
 import { createDiscussion } from "./routes/createDiscussion.js";
 import { getUsers } from "./routes/getUsers.js";
 import bodyParser from "body-parser";
 import cors from "cors";
+import { send } from "node:process";
 
 const app = express();
 const server = createServer(app);
@@ -37,7 +39,8 @@ app
   .use("/api", getActiveDiscussions)
   .use("/api", getParticipants)
   .use("/api", createDiscussion)
-  .use("/api", getUsers);
+  .use("/api", getUsers)
+  .use("/api", sendMessages);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
