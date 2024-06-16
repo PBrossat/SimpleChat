@@ -10,21 +10,19 @@ import { MessagesBox } from "./MessagesBox.jsx";
 export function ChatRoom() {
   // Refuse to go back to the previous page (work only twice)
   window.history.pushState(null, "", window.location.href);
-  const [isCreateDiscussionInputVisible, setIsCreateDiscussionInputVisible] = useState(false);
-
+  const [isCreateDiscussionInputVisible, setIsCreateDiscussionInputVisible] =
+    useState(false);
 
   return (
     <div className="chat-room">
       {/* barre latérale  */}
       {/* liste des discussions */}
-      <Discussions 
+      <Discussions
         isCreateDiscussionInputVisible={isCreateDiscussionInputVisible}
         setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
       />
-      <Chat
-        
-      />
-      
+      <Chat />
+
       {/* chat */}
     </div>
   );

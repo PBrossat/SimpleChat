@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 //import { useNavigate } from "react-router-dom";
 import "../style/Timer.css";
 
+export function Timer({ dateParam }) {
+  const [date, setDate] = useState(dateParam);
 
-export function Timer({dateParam}) {
-    
-    const [date, setDate] = useState(dateParam);
+  const handleMessage = () => {
+    setDate(date);
+  };
 
-    const handleMessage = () => {
-        setDate(date);
-    };
-    
-    
-
-  return (
-    <div className="Timer">
-            {date}
-    </div>
-    
-  );
+  return <div className="Timer">{date}</div>;
 }

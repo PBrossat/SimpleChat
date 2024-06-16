@@ -1,15 +1,14 @@
-.BulleContainer{
-    background-color: rgb(255, 255, 255);
-    display: block;
-    max-width: 70%;
-    width: fit-content;
+.BulleContainer {
+  background-color: rgb(255, 255, 255);
+  display: block;
+  max-width: 70%;
+  width: fit-content;
 }
 
-
-.left{
-    margin-right: auto;
+.left {
+  margin-right: auto;
 }
 
-.right{
-    margin-left: auto;
+.right {
+  margin-left: auto;
 }
