@@ -1,4 +1,4 @@
-import "dotenv/config";
+import 'dotenv/config.js';
 
 import { Router } from "express";
 import { getUser } from "../controllers/userController.js";
@@ -41,11 +41,11 @@ router.post("/login", async (req, res) => {
 
             delete user.password; // don't send the password to the client
 
-            const secret = process.env.ACCES_TOKEN_SECRET;
+            const secret = process.env.ACCES_TOKEN_SECRET || "secret";
             const token = jwt.sign(user, secret, { expiresIn: "3m" });
             const refreshToken = jwt.sign(
               user,
-              process.env.REFRESH_TOKEN_SECRET,
+              process.env.REFRESH_TOKEN_SECRET || "secret",
               { expiresIn: "1h" } // longer expiration time than the first token
             );
 

@@ -7,6 +7,8 @@ body {
     Arial,
     Lucida Grande,
     sans-serif;
+
+  overflow: hidden;
 }
 
 .primary-btn {

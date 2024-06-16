@@ -31,6 +31,26 @@ export function addDiscussion(discussion) {
   });
 }
 
+export function addMessage(discussion) {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(DB_PATH);
+
+    // created_at is a field in the database that is automatically filled with the current date and time
+    const sql = `INSERT INTO Messages (conversation_id, sender_id, content, timestamp, is_read) VALUES (?, ?, ?,?,?)`;
+    const values = [discussion.id, discussion.sender, discussion.message,discussion.timestamp,false];
+
+    db.run(sql, values, function (error) {
+      if (error) {
+        console.error("Error adding new message to the database:", error);
+        reject(error);
+      } else {
+        resolve(this.lastID); // If there is no error, resolve the promise and send the discussion
+      }
+      db.close(); // Close the database connection
+    });
+  });
+}
+
 export function getActiveDiscussions(userId) {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(DB_PATH);

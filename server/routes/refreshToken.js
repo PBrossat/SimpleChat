@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv/config.js";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
@@ -13,7 +13,7 @@ router.post("/refreshToken", async (req, res) => {
     return res.status(401).send("No token provided");
   }
 
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, data) => {
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET || "secret", (err, data) => {
     if (err) {
       return res.status(403).send("Refresh token invalid");
     }
@@ -22,10 +22,10 @@ router.post("/refreshToken", async (req, res) => {
     delete data.iat;
     delete data.exp;
 
-    const token = jwt.sign(data, process.env.ACCES_TOKEN_SECRET, {
+    const token = jwt.sign(data, process.env.ACCES_TOKEN_SECRET || "secret", {
       expiresIn: "3m",
     });
-    const refreshToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, {
+    const refreshToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET || "secret", {
       expiresIn: "1h",
     });
     res.status(200).json({ token, refreshToken });

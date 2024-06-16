@@ -16,7 +16,7 @@ export async function hashPassword(password) {
 // Function to verify the token and return the decoded value of the token
 export async function verifyToken(token) {
   try {
-    const decoded = jwt.verify(token, process.env.ACCES_TOKEN_SECRET);
+    const decoded = jwt.verify(token, process.env.ACCES_TOKEN_SECRET || "secret");
     return decoded;
   } catch (err) {
     console.error("Error verifying the token:", err);
