@@ -21,9 +21,10 @@ export function ChatRoom() {
         isCreateDiscussionInputVisible={isCreateDiscussionInputVisible}
         setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
       />
-      <Chat />
-
-      {/* chat */}
+      <Chat
+        isCreateDiscussionInputVisible={isCreateDiscussionInputVisible}
+        setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
+      />
     </div>
   );
 }

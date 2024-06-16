@@ -136,7 +136,7 @@ export function ListDiscussion() {
       }
 
       return formattedParticipants;
-    }
+    };
 
     return (
       <List sx={style} subheader={<li />}>
@@ -149,7 +149,7 @@ export function ListDiscussion() {
             <ListItem
               key={discussion.id}
               button
-              onClick={() => console.log("clicked")}
+              onClick={() => console.log(discussion.id + " clicked")}
             >
               <ListItemAvatar>
                 <Avatar

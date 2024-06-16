@@ -4,16 +4,18 @@ import { MessagesBox } from "./MessagesBox.jsx";
 import { MessageInput } from "./MessageInput.jsx";
 import { CreateDiscussionInput } from "./CreateDiscussionInput";
 
-export function Chat() {
-  const [isCreateDiscussionInputVisible, setIsCreateDiscussionInputVisible] =
-    useState(false);
-
+export function Chat(props) {
+  console.log(props.isCreateDiscussionInputVisible);
   return (
     <div className="Chat-div">
-      <CreateDiscussionInput />
+      <CreateDiscussionInput
+        displayCreateDisucssionInput={props.isCreateDiscussionInputVisible}
+        setIsCreateDiscussionInputVisible={
+          props.setIsCreateDiscussionInputVisible
+        }
+      />
       <MessagesBox
-        displayCreateDisucssionInput={isCreateDiscussionInputVisible}
-        setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
+        isCreateDiscussionInputVisible={props.isCreateDiscussionInputVisible}
       />
       <MessageInput />
     </div>

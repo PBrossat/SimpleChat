@@ -7,8 +7,6 @@ import { type } from "@testing-library/user-event/dist/cjs/utility/type.js";
 const router = Router();
 
 router.post("/sendMessage", async (req, res) => {
-  console.log("in sendMessage : " + req.body.test);
-
   const token = req.headers.authorization.split(" ")[1];
 
   let user = null;

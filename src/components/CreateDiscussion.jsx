@@ -2,9 +2,10 @@ import "../style/CreateDiscussion.css";
 import Tooltip from "@mui/material/Tooltip";
 
 export function CreateDiscussion(props) {
-  
   function handleClick() {
-    props.setIsInputCreateDiscussionVisible(!props.isCreateDiscussionInputVisible);
+    props.setIsInputCreateDiscussionVisible(
+      !props.isCreateDiscussionInputVisible
+    );
   }
 
   return (

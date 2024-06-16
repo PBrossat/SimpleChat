@@ -1,20 +1,19 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import Autocomplete from '@mui/material/Autocomplete';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import LinearProgress from "@mui/material/LinearProgress";
+import Autocomplete from "@mui/material/Autocomplete";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import { verifyToken } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import Button from '@mui/material/Button';
-import { set } from "rsuite/esm/internals/utils/date";
+import Button from "@mui/material/Button";
 
 export function CreateDiscussionInput(props) {
   const currentUser = JSON.parse(localStorage.getItem("user"));
+  // console.log(props.displayCreateDisucssionInput);
 
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
@@ -24,18 +23,18 @@ export function CreateDiscussionInput(props) {
   const [nameDiscussion, setNameDiscussion] = useState(null);
 
   const styleModal = {
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "20%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
+    bgcolor: "background.paper",
+    border: "1px solid #000",
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
   };
-  
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -69,7 +68,7 @@ export function CreateDiscussionInput(props) {
 
   const handleAutocompleteChange = (event, value) => {
     // Ensure the current user is always included in the selected users
-    if (!value.some(user => user.id === currentUser.id)) {
+    if (!value.some((user) => user.id === currentUser.id)) {
       value.unshift(currentUser); // Add the current user at the beginning of the array
     }
     setSelectedUsers(value);
@@ -91,15 +90,13 @@ export function CreateDiscussionInput(props) {
     console.log(selectedUsers);
     // TODO : Call api to create a discussion
 
-
     setIsModalOpen(false);
     setSelectedUsers([currentUser]);
     props.setIsCreateDiscussionInputVisible(false);
-
   };
 
   if (loading) {
-    return <Skeleton animation="wave" st/>;
+    return <Skeleton animation="wave" st />;
   }
 
   // Format the list of users to display in the modal
@@ -116,14 +113,18 @@ export function CreateDiscussionInput(props) {
 
   if (props.displayCreateDisucssionInput) {
     return (
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <Autocomplete
           multiple
           id="tags-standard"
           options={users}
           onChange={handleAutocompleteChange}
           defaultValue={[currentUser]}
-          getOptionLabel={(option) => option.id === currentUser.id ? "Vous" : option.name + " " + option.surname}
+          getOptionLabel={(option) =>
+            option.id === currentUser.id
+              ? "Vous"
+              : option.name + " " + option.surname
+          }
           isOptionEqualToValue={(option, value) => option.id === value.id}
           value={selectedUsers}
           renderInput={(params) => (
@@ -136,7 +137,12 @@ export function CreateDiscussionInput(props) {
           style={{ width: "99%", margin: "10px" }}
         />
         {selectedUsers.length > 0 && (
-          <Button variant="outlined" color="success" style={{marginLeft:"10px"}} onClick={handleClickCreate}>
+          <Button
+            variant="outlined"
+            color="success"
+            style={{ marginLeft: "10px" }}
+            onClick={handleClickCreate}
+          >
             Créer discussion
           </Button>
         )}
@@ -150,17 +156,26 @@ export function CreateDiscussionInput(props) {
             <Typography id="title" variant="h6" component="h2">
               Confirmation
             </Typography>
-            <Typography id="description" sx={{ mt: 2}}>
-            Êtes-vous sûr de vouloir créer une discussion avec : <br />
-            <strong>{formatUserList(userNamesToDisplay)}</strong> ?
+            <Typography id="description" sx={{ mt: 2 }}>
+              Êtes-vous sûr de vouloir créer une discussion avec : <br />
+              <strong>{formatUserList(userNamesToDisplay)}</strong> ?
             </Typography>
             <Box sx={{ mt: 2 }}>
-            <Button variant="outlined" color="error" style={{marginRight:"10px"}} onClick={handleCloseModal}>
-              Annuler 
-            </Button>
-            <Button variant="outlined" color="success"  onClick={handleConfirmCreateGroup}>
-              Confirmer
-            </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                style={{ marginRight: "10px" }}
+                onClick={handleCloseModal}
+              >
+                Annuler
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleConfirmCreateGroup}
+              >
+                Confirmer
+              </Button>
             </Box>
           </Box>
         </Modal>

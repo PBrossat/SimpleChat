@@ -17,7 +17,6 @@ export function Discussions(props) {
     setIsListVisible(data_from_input_research_user);
   }
 
-
   function setResearchResults(data_from_input_research_user) {
     setListOfUsersAfterResearch(data_from_input_research_user);
   }
@@ -31,9 +30,10 @@ export function Discussions(props) {
       <div className="title-and-button-div">
         <h1 className="title-discussions">Discussions</h1>
         {/* Bouton pour créer une conversation de groupe */}
-        <CreateDiscussion 
-          setIsInputCreateDiscussionVisible={setInputCreateDiscussionVisible} 
-          isCreateDiscussionInputVisible={props.isCreateDiscussionInputVisible}/>
+        <CreateDiscussion
+          setIsInputCreateDiscussionVisible={setInputCreateDiscussionVisible}
+          isCreateDiscussionInputVisible={props.isCreateDiscussionInputVisible}
+        />
       </div>
       {/* input permettant de rechercher un user a qui on a parler ou non, les premiers résultats sont les personnes avec qui on a déjà discutter
         puis on retrouve les utilisateurs avec qui on a pas encore parler*/}

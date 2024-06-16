@@ -4,6 +4,7 @@ import { BulleContainer } from "./BulleContainer";
 import { Timer } from "./Timer";
 import { MessageInput } from "./MessageInput";
 import { useEffect, useRef } from "react";
+// import { Height } from "@material-ui/icons";
 
 export function MessagesBox(props) {
   const containerRef = useRef(null);
@@ -11,8 +12,6 @@ export function MessagesBox(props) {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = containerRef.current.scrollTop;
-      //console.log("Scroll position:", scrollTop);
-      // Do something with the scroll position
     };
 
     containerRef.current.addEventListener("scroll", handleScroll);
@@ -25,14 +24,14 @@ export function MessagesBox(props) {
     };
   }, []);
 
+  const isInputCreateDiscussionVisible = props.isCreateDiscussionInputVisible;
+
   return (
-    <div className="MessagesBox" ref={containerRef}>
-      <CreateDiscussionInput
-        displayCreateDisucssionInput={props.displayCreateDisucssionInput}
-        setIsCreateDiscussionInputVisible={
-          props.setIsCreateDiscussionInputVisible
-        }
-      />
+    <div
+      className="MessagesBox"
+      ref={containerRef}
+      style={{ height: isInputCreateDiscussionVisible ? "80vh" : "90vh" }}
+    >
       {/* <Bulle text="ceci est un message de test" align="left"/>
       <Bulle text="Je suis une réponse" align="right"/> */}
       <Timer dateParam="MER 17h35" />
@@ -61,6 +60,10 @@ export function MessagesBox(props) {
       <BulleContainer text="Ola ma quoicoubébette" align="right" />
       <Timer dateParam="MER 17h35" />
       <BulleContainer text="ceci est un message de test" align="left" />
+      <BulleContainer text="Je suis une réponse" align="right" />
+      <BulleContainer text="Je suis une réponse" align="right" />
+      <BulleContainer text="Je suis une réponse" align="right" />
+      <BulleContainer text="Je suis une réponse" align="right" />
       <BulleContainer text="Je suis une réponse" align="right" />
       <BulleContainer
         text="ceci est un message de test et je vais essater de faire un text un peu trop long pour voir si le max with fonctionne"
