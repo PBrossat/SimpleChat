@@ -1,5 +1,5 @@
 .message-bubble {
-  padding: 15px;
+  padding: 10px;
   font-family:
     Segoe UI Historic,
     Segoe UI,
@@ -12,13 +12,20 @@
   word-wrap: break-word;
   width: fit-content;
 }
+
 .in {
   background-color: #d8d7d8;
   color: rgb(0, 0, 0);
   margin-left: 10px;
 }
+
 .out {
   background-color: #0084ff;
   color: white;
   margin-right: 5px;
+}
+
+.out::selection {
+  color: black;
+  background-color: grey;
 }
