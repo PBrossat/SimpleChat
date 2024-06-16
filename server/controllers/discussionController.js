@@ -31,20 +31,22 @@ export function addDiscussion(discussion) {
   });
 }
 
-export function addMessage(discussion) {
+export function addMessage(conversationId, senderId, content, is_read) {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(DB_PATH);
 
+    const time = new Date().toISOString().slice(0, 19).replace("T", " ");
+
     // created_at is a field in the database that is automatically filled with the current date and time
     const sql = `INSERT INTO Messages (conversation_id, sender_id, content, timestamp, is_read) VALUES (?, ?, ?,?,?)`;
-    const values = [discussion.id, discussion.sender, discussion.message,discussion.timestamp,false];
+    const values = [conversationId, senderId, content, time, is_read];
 
     db.run(sql, values, function (error) {
       if (error) {
         console.error("Error adding new message to the database:", error);
         reject(error);
       } else {
-        resolve(this.lastID); // If there is no error, resolve the promise and send the discussion
+        resolve(this.lastID); // If there is no error, resolve the promise and send the message
       }
       db.close(); // Close the database connection
     });
