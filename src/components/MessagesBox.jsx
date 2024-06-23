@@ -4,7 +4,6 @@ import { BulleContainer } from "./BulleContainer";
 import { Timer } from "./Timer";
 import { MessageInput } from "./MessageInput";
 import { useEffect, useRef } from "react";
-// import { Height } from "@material-ui/icons";
 
 export function MessagesBox(props) {
   const containerRef = useRef(null);
@@ -30,7 +29,7 @@ export function MessagesBox(props) {
     <div
       className="MessagesBox"
       ref={containerRef}
-      style={{ height: isInputCreateDiscussionVisible ? "80vh" : "90vh" }}
+      style={{ height: isInputCreateDiscussionVisible ? "75vh" : "90vh" }}
     >
       {/* <Bulle text="ceci est un message de test" align="left"/>
       <Bulle text="Je suis une réponse" align="right"/> */}

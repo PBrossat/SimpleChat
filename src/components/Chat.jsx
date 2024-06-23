@@ -5,7 +5,6 @@ import { MessageInput } from "./MessageInput.jsx";
 import { CreateDiscussionInput } from "./CreateDiscussionInput";
 
 export function Chat(props) {
-  console.log(props.isCreateDiscussionInputVisible);
   return (
     <div className="Chat-div">
       <CreateDiscussionInput
