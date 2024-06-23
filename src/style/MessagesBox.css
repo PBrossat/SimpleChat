@@ -4,4 +4,10 @@
   flex-direction: column;
   box-sizing: border-box;
   overflow-y: auto;
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.MessagesBox::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, Opera ans Arc */
 }

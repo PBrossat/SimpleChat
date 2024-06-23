@@ -139,7 +139,7 @@ export function ListDiscussion() {
     };
 
     return (
-      <List sx={style} subheader={<li />}>
+      <List sx={style} subheader={<li />} style={{ "scrollbar-width": "none" }}>
         {discussions.length === 0 ? (
           <ListItem>
             <ListItemText primary="Aucune discussion" />

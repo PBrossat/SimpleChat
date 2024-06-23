@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "../style/MessageInput.css";
-import TextField from "@mui/material/TextField";
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function MessageInput(props) {
   const [message, setMessage] = useState("");
@@ -53,6 +51,7 @@ export function MessageInput(props) {
 
   return (
     <form className="message-input" onSubmit={sendMessage}>
+      {/* TODO: change to textArea in order to Shift + Enter */}
       <input
         type="text"
         value={message}

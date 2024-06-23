@@ -18,7 +18,11 @@ export function ListResultResearchUser(props) {
     };
 
     return (
-      <List sx={style} subheader={<li />}>
+      <List
+        sx={style}
+        subheader={<li />}
+        style={{ "scrollbar-width": "none" }} // Hide the scrollbar
+      >
         {listToDisplay.length === 0 ? (
           <ListItem>
             <ListItemText primary="Aucun utilisateur trouvé" />

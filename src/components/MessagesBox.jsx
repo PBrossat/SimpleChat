@@ -4,6 +4,7 @@ import { BulleContainer } from "./BulleContainer";
 import { Timer } from "./Timer";
 import { MessageInput } from "./MessageInput";
 import { useEffect, useRef } from "react";
+// import { Height } from "@material-ui/icons";
 
 export function MessagesBox(props) {
   const containerRef = useRef(null);
