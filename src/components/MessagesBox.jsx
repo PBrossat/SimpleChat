@@ -97,7 +97,10 @@ export function MessagesBox(props) {
       <BulleContainer text="Je suis une réponse" align="right" />
       <Timer dateParam="JEU 10h35" />
       <BulleContainer text="Bonjour mon quoicoubébou" align="left" />
-      <BulleContainer text="Ola ma quoicoubébette" align="right" />
+      <BulleContainer
+        text="Ola ma quoicoubébette \n je m'appel pierrick et toi ?? \n jdipezjdopezj"
+        align="right"
+      />
     </div>
   );
 }

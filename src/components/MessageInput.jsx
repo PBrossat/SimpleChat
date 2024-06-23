@@ -1,30 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../style/MessageInput.css";
 import toast from "react-hot-toast";
 
 export function MessageInput(props) {
   const [message, setMessage] = useState("");
+  const textareaRef = useRef(null);
+  const messageInputRef = useRef(null);
+
+  const [initialHeight, setInitialHeight] = useState(null);
+  const [currentLines, setCurrentLines] = useState(1);
+  const [currentLinesHeight, setCurrentLinesHeight] = useState(0);
+
+  const maxHeight = 100; // Max height of the textarea
+
+  useEffect(() => {
+    if (textareaRef.current && messageInputRef.current) {
+      if (initialHeight === null) {
+        setInitialHeight(textareaRef.current.offsetHeight); // Initial height of the textarea
+      }
+
+      setCurrentLines((message.match(/\n/g) || []).length + 1);
+      setCurrentLinesHeight(currentLines * 20);
+
+      // Set the height of the textarea (grow with the number of lines)
+      if (currentLinesHeight >= maxHeight) {
+        textareaRef.current.style.height = `${maxHeight}px`;
+        textareaRef.current.style.overflowY = "scroll";
+        messageInputRef.current.style.transform = `translateY(${initialHeight - maxHeight}px)`;
+      } else {
+        textareaRef.current.style.height = `${currentLinesHeight}px`;
+        textareaRef.current.style.overflowY = "hidden";
+        if (currentLines !== 1) {
+          messageInputRef.current.style.transform = `translateY(${initialHeight - currentLinesHeight}px)`;
+        } else {
+          messageInputRef.current.style.transform = `translateY(0px)`;
+        }
+      }
+    }
+  }, [message, initialHeight, currentLines, currentLinesHeight]);
 
   const handleKeyDown = (e) => {
-    if (e.code === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
       sendMessage(e);
-      console.log("Enter key pressed");
-    }
-
-    if (e.code === "Enter" && e.shiftKey) {
-      setMessage((message) => message + "\n");
     }
   };
 
   const sendMessage = (e) => {
-    console.log("Message envoyé :", message);
+    e.preventDefault();
     handleSubmit(e);
+
+    // Réinitialiser tous les états
     setMessage("");
+    setCurrentLines(1);
+    setCurrentLinesHeight(0);
+    textareaRef.current.style.height = `${initialHeight}px`;
+    messageInputRef.current.style.transform = `translateY(0px)`;
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("in handleSubmit");
 
     const req = await fetch("http://localhost:3001/api/sendMessage", {
       method: "POST",
@@ -41,7 +75,7 @@ export function MessageInput(props) {
       return;
     }
 
-    const data = await req.json().catch((error) => {
+    await req.json().catch((error) => {
       toast.error(
         "Une erreur s'est produite. \n Veuillez réessayer de vous connecter"
       );
@@ -50,15 +84,19 @@ export function MessageInput(props) {
   }
 
   return (
-    <form className="message-input" onSubmit={sendMessage}>
-      {/* TODO: change to textArea in order to Shift + Enter */}
-      <input
-        type="text"
+    <form
+      className="message-input"
+      onSubmit={sendMessage}
+      ref={messageInputRef}
+    >
+      <textarea
+        ref={textareaRef}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Aa"
         className="message-input-field"
+        rows="1"
       />
       <button type="submit" className="send-button">
         <svg className="send-button-svg">
