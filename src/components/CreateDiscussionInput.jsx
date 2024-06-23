@@ -20,7 +20,6 @@ export function CreateDiscussionInput(props) {
   const [loading, setLoading] = useState(true);
   const [selectedUsers, setSelectedUsers] = useState([currentUser]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [nameDiscussion, setNameDiscussion] = useState(null);
 
   const styleModal = {
     position: "absolute",
