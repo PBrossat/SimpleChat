@@ -33,4 +33,4 @@ router.post("/sendMessage", async (req, res) => {
     });
 });
 
-export { router as sendMessages };
+export { router as sendMessage };

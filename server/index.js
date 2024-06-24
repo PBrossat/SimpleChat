@@ -5,7 +5,7 @@ import { login } from "./routes/login.js";
 import { researchUser } from "./routes/researchUser.js";
 import { refreshToken } from "./routes/refreshToken.js";
 import { getActiveDiscussions } from "./routes/getActiveDiscussions.js";
-import { sendMessages } from "./routes/sendMessage.js";
+import { sendMessage } from "./routes/sendMessage.js";
 import { getParticipants } from "./routes/getParticipants.js";
 import { createDiscussion } from "./routes/createDiscussion.js";
 import { getUsers } from "./routes/getUsers.js";
@@ -40,7 +40,7 @@ app
   .use("/api", getParticipants)
   .use("/api", createDiscussion)
   .use("/api", getUsers)
-  .use("/api", sendMessages);
+  .use("/api", sendMessage)
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");
