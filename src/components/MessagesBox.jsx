@@ -1,26 +1,44 @@
 import "../style/MessagesBox.css";
 import { BulleContainer } from "./BulleContainer";
 import { Timer } from "./Timer";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 // import { Height } from "@material-ui/icons";
 
 export function MessagesBox(props) {
   const containerRef = useRef(null);
+  const [discussionToDisplay, setDiscussionToDisplay] = useState(null);
 
   useEffect(() => {
+    // Set the discussion to display in the MessagesBox
+    setDiscussionToDisplay(props.discussionToDisplay);
+
+    console.log("discussionToDisplay", discussionToDisplay);
+
+    // createAllBubbles(discussionToDisplay);
+
     const handleScroll = () => {
+      // eslint-disable-next-line no-unused-vars
       const scrollTop = containerRef.current.scrollTop;
     };
 
-    containerRef.current.addEventListener("scroll", handleScroll);
+    const container = containerRef.current;
+
+    container.addEventListener("scroll", handleScroll);
 
     // Set the scroll position to the maximum value
-    containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    container.scrollTop = container.scrollHeight;
 
     return () => {
-      containerRef.current.removeEventListener("scroll", handleScroll);
+      container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [discussionToDisplay, props.discussionToDisplay]);
+
+  // TODO: Create all bubbles from the discussion with api call
+  // const createAllBubbles = (discussionToDisplay) => {
+  //   const idDiscussion = discussionToDisplay.id;
+
+  //   // Get all messages from the discussion
+  // };
 
   const isInputCreateDiscussionVisible = props.isCreateDiscussionInputVisible;
 
