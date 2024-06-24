@@ -25,6 +25,10 @@ export function Discussions(props) {
     props.setIsCreateDiscussionInputVisible(data_from_button_create_discussion);
   }
 
+  function setDiscussionToDisplay(data_from_button_create_discussion) {
+    props.setDiscussionToDisplay(data_from_button_create_discussion);
+  }
+
   return (
     <div className="discussions-div">
       <div className="title-and-button-div">
@@ -42,7 +46,9 @@ export function Discussions(props) {
         setResearchResultsList={setResearchResults}
       />
       {/* Liste des discussions */}
-      {isListVisible && <ListDiscussion />}
+      {isListVisible && (
+        <ListDiscussion setDiscussionToDisplay={setDiscussionToDisplay} />
+      )}
       {!isListVisible && (
         <ListResultResearchUser
           listOfUsersAfterResearch={listOfUsersAfterResearch}

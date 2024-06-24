@@ -1,10 +1,14 @@
 import "../style/Chat.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessagesBox } from "./MessagesBox.jsx";
 import { MessageInput } from "./MessageInput.jsx";
 import { CreateDiscussionInput } from "./CreateDiscussionInput";
 
 export function Chat(props) {
+  // useEffect(() => {
+  //   console.log("discussionToDisplay", props.discussionToDisplay);
+  // });
+
   return (
     <div className="Chat-div">
       <CreateDiscussionInput
@@ -15,6 +19,7 @@ export function Chat(props) {
       />
       <MessagesBox
         isCreateDiscussionInputVisible={props.isCreateDiscussionInputVisible}
+        discussionToDisplay={props.discussionToDisplay}
       />
       <MessageInput />
     </div>

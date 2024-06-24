@@ -13,7 +13,7 @@ import Avatar from "@mui/material/Avatar";
 import { Divider } from "@mui/material";
 import { Users, User } from "lucide-react";
 
-export function ListDiscussion() {
+export function ListDiscussion(props) {
   const [discussions, setDiscussions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -108,6 +108,11 @@ export function ListDiscussion() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
+  // Function to handle the click on a discussion
+  const handleClickDiscussion = (discussion) => () => {
+    props.setDiscussionToDisplay(discussion);
+  };
+
   function displayListDiscussion() {
     const currentUserId = JSON.parse(localStorage.getItem("user")).id;
 
@@ -149,7 +154,7 @@ export function ListDiscussion() {
             <ListItem
               key={discussion.id}
               button
-              onClick={() => console.log(discussion.id + " clicked")}
+              onClick={handleClickDiscussion(discussion)}
             >
               <ListItemAvatar>
                 <Avatar

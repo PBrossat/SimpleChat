@@ -12,6 +12,7 @@ export function ChatRoom() {
   window.history.pushState(null, "", window.location.href);
   const [isCreateDiscussionInputVisible, setIsCreateDiscussionInputVisible] =
     useState(false);
+  const [discussionToDisplay, setDiscussionToDisplay] = useState(null);
 
   return (
     <div className="chat-room">
@@ -20,10 +21,12 @@ export function ChatRoom() {
       <Discussions
         isCreateDiscussionInputVisible={isCreateDiscussionInputVisible}
         setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
+        setDiscussionToDisplay={setDiscussionToDisplay}
       />
       <Chat
         isCreateDiscussionInputVisible={isCreateDiscussionInputVisible}
         setIsCreateDiscussionInputVisible={setIsCreateDiscussionInputVisible}
+        discussionToDisplay={discussionToDisplay}
       />
     </div>
   );
