@@ -9,6 +9,7 @@ import { sendMessage } from "./routes/sendMessage.js";
 import { getParticipants } from "./routes/getParticipants.js";
 import { createDiscussion } from "./routes/createDiscussion.js";
 import { getUsers } from "./routes/getUsers.js";
+import { getAllMessagesFromDiscussion } from "./routes/getAllMessagesFromDiscussion.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { send } from "node:process";
@@ -41,6 +42,7 @@ app
   .use("/api", createDiscussion)
   .use("/api", getUsers)
   .use("/api", sendMessage)
+  .use("/api", getAllMessagesFromDiscussion);
 
 server.listen(3001, () => {
   console.log("server running at http://localhost:3001");

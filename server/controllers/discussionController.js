@@ -149,3 +149,39 @@ export function addParticipantToDiscussion(participant, discussionId) {
     });
   });
 }
+
+export function getAllMessagesFromDiscussion(conversationId) {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(DB_PATH);
+
+    const sql = `
+        SELECT m.id, m.sender_id, m.content, m.timestamp, m.is_read
+        FROM Messages m
+        WHERE m.conversation_id = ?
+      `;
+    const values = [conversationId];
+
+    db.all(sql, values, (error, rows) => {
+      db.close(); // Close the database connection
+
+      if (error) {
+        console.error(
+          "Error getting all messages from the discussion in the database:",
+          error
+        );
+        reject(error);
+      } else {
+        const messages = rows.map((row) => {
+          return {
+            id: row.id,
+            sender_id: row.sender_id,
+            content: row.content,
+            timestamp: row.timestamp,
+            is_read: row.is_read,
+          };
+        });
+        resolve(messages); // If there is no error, resolve the promise and send the messages
+      }
+    });
+  });
+}
